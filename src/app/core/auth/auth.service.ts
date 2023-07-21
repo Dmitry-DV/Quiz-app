@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.development';
 import { Observable, Subject } from 'rxjs';
 import { LoginResponseType } from 'src/types/login-response.type';
 import { UserInfoType } from 'src/types/user-info.type';
+import { LogoutResponseType } from 'src/types/logout-response.type';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class AuthService {
   private isLogged: boolean = false;
 
   constructor(private http: HttpClient) {
-    this.isLogged = !!localStorage.getItem('this.accessTokenKey');
+    this.isLogged = !!localStorage.getItem(this.accessTokenKey);
+    console.log(this.isLogged)
   }
 
   getLoggedIn(): boolean {
@@ -31,6 +33,11 @@ export class AuthService {
      password
    })
   }
+
+  logout(): Observable<LogoutResponseType> {
+    const refreshToken: string | null = localStorage.getItem(this.refreshTokenKey);
+    return this.http.post<LogoutResponseType>(environment.apiHost + 'logout', {refreshToken});
+  };
 
   setTokens(accessToken: string, refreshToken: string): void {
     localStorage.setItem(this.accessTokenKey, accessToken);
@@ -51,10 +58,15 @@ export class AuthService {
       return null;
   }
 
-  private removeTokens(): void {
+  removeTokens(): void {
     localStorage.removeItem(this.accessTokenKey);
     localStorage.removeItem(this.refreshTokenKey);  
     this.isLogged = false;
     this.isLogged$.next(false);
+  };
+
+
+  removeUserInfo(): void {
+    localStorage.removeItem(this.userInfoKey);
   };
 }

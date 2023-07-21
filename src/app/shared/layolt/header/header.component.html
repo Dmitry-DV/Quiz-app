@@ -10,7 +10,7 @@
                 <div class="profile-user" id="profile-full-name">
                    {{userInfo.fullName}}
                 </div>
-                <a routerLink="/logout" class="profile-logout">
+                <a (click)="logout()" class="profile-logout">
                     Выйти
                 </a>
             </div>
