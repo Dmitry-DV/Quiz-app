@@ -8,15 +8,13 @@ import { Location } from '@angular/common';
   providedIn: 'root',
 })
 export class authForwardGuard implements CanActivate {
-  // guard проверяет авторизован ли пользователь. если авторизован запрещает переходить на страницу signup
+  // Данный guard проверяет авторизован ли пользователь. Eсли авторизован запрещает переходить на страницу signup
   constructor(
     private location: Location,
     private authService: AuthService,
   ) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const isAllowed = true;
-
     if (this.authService.getLoggedIn()) {
       this.location.back();
       return false;
