@@ -1,4 +1,4 @@
 export type LogoutResponseType = {
-    error: boolean,
-    message: string
-}
+  error: boolean;
+  message: string;
+};

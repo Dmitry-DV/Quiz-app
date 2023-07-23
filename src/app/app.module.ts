@@ -13,24 +13,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LayoltComponent,
-    HeaderComponent,
-    FooterComponent,
-    MainComponent
-  ],
-  imports: [
-    BrowserModule,
-    RouterModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatSnackBarModule,
-    AppRoutingModule
-  ],
-  providers: [
-    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
-  ],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent, LayoltComponent, HeaderComponent, FooterComponent, MainComponent],
+  imports: [BrowserModule, RouterModule, HttpClientModule, BrowserAnimationsModule, MatSnackBarModule, AppRoutingModule],
+  providers: [{ provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
