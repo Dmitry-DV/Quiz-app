@@ -6,6 +6,7 @@ import { LoginResponseType } from 'src/types/login-response.type';
 import { UserInfoType } from 'src/types/user-info.type';
 import { LogoutResponseType } from 'src/types/logout-response.type';
 import { SignupResponseType } from 'src/types/signup-response.type';
+import { RefreshResponseType } from 'src/types/refresh-response.type';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.isLogged = !!localStorage.getItem(this.accessTokenKey);
-    console.log(this.isLogged);
   }
 
   getLoggedIn(): boolean {
@@ -47,7 +47,7 @@ export class AuthService {
       );
   }
 
-  signup(name: string, lastName: string, email: string, password: string): Observable<LoginResponseType> {
+  signup(name: string, lastName: string, email: string, password: string): Observable<SignupResponseType> {
     return this.http.post<SignupResponseType>(environment.apiHost + 'signup', {
       name,
       lastName,
@@ -68,6 +68,18 @@ export class AuthService {
     localStorage.setItem(this.refreshTokenKey, refreshToken);
     this.isLogged = true;
     this.isLogged$.next(true);
+  }
+
+  getTokens(): { accessToken: string | null; refreshToken: string | null } {
+    return {
+      accessToken: localStorage.getItem(this.accessTokenKey),
+      refreshToken: localStorage.getItem(this.refreshTokenKey),
+    };
+  }
+
+  refresh(): Observable<RefreshResponseType> {
+    const refreshToken: string | null = localStorage.getItem(this.refreshTokenKey);
+    return this.http.post<RefreshResponseType>(environment.apiHost + 'refresh', { refreshToken });
   }
 
   setUserInfo(info: UserInfoType): void {
