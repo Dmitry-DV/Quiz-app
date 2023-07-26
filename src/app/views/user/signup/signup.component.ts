@@ -33,7 +33,7 @@ export class SignupComponent {
         next: (data: SignupResponseType) => {
           if (data.error || !data.user) {
             this._snackBar.open('Ошибка при регистрации');
-            throw new Error(data.message ? data.message : 'Error with data on signup');
+            throw new Error(data.message ? data.message : 'Ошибка с данными при регистрации');
           }
 
           if (this.signupForm.value.email && this.signupForm.value.password) {
@@ -41,7 +41,7 @@ export class SignupComponent {
               next: (data: LoginResponseType) => {
                 if (data.error || !data.accessToken || !data.refreshToken || !data.fullName || !data.userId) {
                   this._snackBar.open('Пользователь зарегистрирован! Произошла ошибка при авторизации! Авторизуйтесь заново.');
-                  throw new Error(data.message ? data.message : 'Error with data on login');
+                  throw new Error(data.message ? data.message : 'Ошибка с данными при входе в систему');
                 }
                 this.router.navigate(['/choice']);
               },

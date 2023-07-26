@@ -29,7 +29,7 @@ export class LoginComponent {
         next: (data: LoginResponseType) => {
           if (data.error || !data.accessToken || !data.refreshToken || !data.fullName || !data.userId) {
             this._snackBar.open('Ошибка при авторизации');
-            throw new Error(data.message ? data.message : 'Error with data on login');
+            throw new Error(data.message ? data.message : 'Ошибка с данными при входе в систему');
           }
 
           this.router.navigate(['/choice']);
