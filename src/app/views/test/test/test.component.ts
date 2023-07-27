@@ -40,6 +40,7 @@ export class TestComponent implements OnInit {
             throw new Error((result as DefaultResponseType).message);
           }
           this.quiz = result as QuizType;
+          console.log(this.quiz);
           this.startQuiz();
         });
       }

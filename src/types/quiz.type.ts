@@ -13,4 +13,5 @@ export type QuizQuestionType = {
 export type QuizAnswerType = {
   id: number;
   answer: string;
+  correct?: boolean;
 };

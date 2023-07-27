@@ -1,0 +1,26 @@
+<section class="answers">
+  <div class="container">
+    <div class="answers-info">
+      Результат прохождения теста <img src="/assets/images/arrow-gray.png" alt="Маленькая стрелка" />
+      <span id="answers-info-title" *ngIf="quizAnswers">{{ quizAnswers.test.name }}</span>
+    </div>
+    <h1 class="big-title answers-title"><span>Правильные ответы</span> к тесту</h1>
+    <div class="answer-user">
+      Тест выполнил <span>{{ userInfo?.fullName }}</span>
+    </div>
+    <div class="answers-test" id="answers-test" *ngIf="quizAnswers">
+      <div class="answer-question" *ngFor="let question of quizAnswers.test.questions; let i = index">
+        <div class="answer-question-title">
+          <span>Вопрос {{ i + 1 }}:</span> {{ question.question }}
+        </div>
+        <div class="answer-question-option" *ngFor="let answer of question.answers" [class.right]="answer.hasOwnProperty('correct') && answer.correct" [class.wrong]="answer.hasOwnProperty('correct') && !answer.correct">
+          <input class="option-answer" type="radio" [value]="answer.id" />
+          <label>{{ answer.answer }}</label>
+        </div>
+      </div>
+    </div>
+    <div class="answer-result" id="see-result">
+      <div (click)="backResult()">Обратно к моему результату теста<img src="/assets/images/small-arrow.png" alt="Маленькая стрелка" /></div>
+    </div>
+  </div>
+</section>

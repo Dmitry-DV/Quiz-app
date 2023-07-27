@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { AnswerQuizType } from 'src/types/answer-quiz-type.response';
 import { DefaultResponseType } from 'src/types/default-response.type';
 import { PassTestResponseType } from 'src/types/pass-test-response.type';
 import { QuizListType } from 'src/types/quiz-list.type';
@@ -36,5 +37,9 @@ export class TestService {
 
   getResult(id: number | string, userId: string | number): Observable<DefaultResponseType | PassTestResponseType> {
     return this.http.get<DefaultResponseType | PassTestResponseType>(environment.apiHost + 'tests/' + id + '/result?userId=' + userId);
+  }
+
+  getDetailedResult(id: number | string, userId: string | number): Observable<DefaultResponseType | AnswerQuizType> {
+    return this.http.get<DefaultResponseType | AnswerQuizType>(environment.apiHost + 'tests/' + id + '/result/details?userId=' + userId);
   }
 }
