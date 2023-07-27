@@ -47,11 +47,12 @@ export class TestComponent implements OnInit {
   }
 
   move(action: ActionTestType): void {
-    const existingResult: UserResultType | undefined = this.userResult.find(item => {
-      return item.questionId === this.activeQuestion.id;
-    });
+    const findCurrentResult = (): UserResultType | undefined => {
+      return this.userResult.find(item => item.questionId === this.activeQuestion.id);
+    };
 
     if (this.choseAnswerId) {
+      const existingResult = findCurrentResult();
       if (existingResult) {
         existingResult.chosenAnswerId = this.choseAnswerId;
       } else {
@@ -69,16 +70,17 @@ export class TestComponent implements OnInit {
         return;
       }
       this.currentQuestionIndex++;
+      this.choseAnswerId = null;
     } else {
       this.currentQuestionIndex--;
     }
 
-    const currentResult: UserResultType | undefined = this.userResult.find(item => {
-      return item.questionId === this.activeQuestion.id;
-    });
+    const currentResult = findCurrentResult();
     if (currentResult) {
       this.choseAnswerId = currentResult.chosenAnswerId;
     }
+
+    console.log(this.userResult);
   }
 
   private startQuiz(): void {
