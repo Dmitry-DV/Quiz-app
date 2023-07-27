@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="pass-question">
-      <a href="javascript:void(0)" id="pass" (click)="move(actionTestType.pass)"
+      <a href="javascript:void(0)" id="pass" (click)="move(actionTestType.pass)" [ngClass]="{ noLink: choseAnswerId }"
         >Пропустить вопрос
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0" y="0" viewBox="0 0 6.3499999 6.3500002" style="enable-background: new 0 0 512 512" xml:space="preserve" class="" id="passSvg">
           <g>

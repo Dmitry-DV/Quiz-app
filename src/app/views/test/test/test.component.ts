@@ -79,8 +79,6 @@ export class TestComponent implements OnInit {
     if (currentResult) {
       this.choseAnswerId = currentResult.chosenAnswerId;
     }
-
-    console.log(this.userResult);
   }
 
   private startQuiz(): void {
